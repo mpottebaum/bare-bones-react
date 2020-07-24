@@ -5,7 +5,7 @@ module.exports = {
     "entry": "./src/index.js",
     "output": {
         "path": __dirname + '/dir',
-        "filename": "[name].[hash].js"
+        "filename": "bundle.js"
     },
     "devtool": "source-map",
     "module": {
