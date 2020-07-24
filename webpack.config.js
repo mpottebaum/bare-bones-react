@@ -1,9 +1,11 @@
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+
 module.exports = {
     "mode": "development",
-    "entry": "src/index.js",
+    "entry": "./src/index.js",
     "output": {
         "path": __dirname + '/dir',
-        "filename": "[name].[chunkhash:8].js"
+        "filename": "[name].[hash].js"
     },
     "devtool": "source-map",
     "module": {
@@ -12,13 +14,7 @@ module.exports = {
                 "test": /\.(js|jsx)$/,
                 "exclude": /node_modules/,
                 "use": {
-                    "loader": "babel-loader",
-                    "options": {
-                        "presets": [
-                            "env",
-                            "react"
-                        ]
-                    }
+                    "loader": "babel-loader"
                 }
             },
             {
@@ -27,7 +23,21 @@ module.exports = {
                     "style-loader",
                     "css-loader"
                 ]
+            },
+            {
+                "test": /\.html$/,
+                "use": [
+                    {
+                        "loader": "html-loader"
+                    }
+                ]
             }
         ]
-    }
+    },
+    "plugins": [
+        new HtmlWebPackPlugin({
+            template: "./src/index.html",
+            filename: "./index.html"
+        })
+    ]
 }
